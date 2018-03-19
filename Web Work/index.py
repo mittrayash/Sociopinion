@@ -8,10 +8,11 @@ def hello():
 
 @app.route("/main")
 def main_page():
-
-    
-
     return render_template('main.html')
+
+@app.route('/compare')
+def comapre_page():
+    return "Compare Page here!"
 
 if __name__ == '__main__':
     app.run(debug=True)
