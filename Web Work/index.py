@@ -12,7 +12,7 @@ def main_page():
 
 @app.route('/compare')
 def comapre_page():
-    return "Compare Page here!"
+    return render_template('compare.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
