@@ -48,6 +48,11 @@ def main_page():
         lis, counts = search(api, 'modi', 100, date_start, date_until)
         print(counts)
 
+        final_list.append(lis)
+        final_count.append(counts)
+
+
+
     print(lis, counts)
     data = {'tweets': lis}
     return render_template('main.html', data=data)
