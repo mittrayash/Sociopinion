@@ -24,10 +24,15 @@ def hello():
 @app.route("/main")
 def main_page():
     tweets = getText()
+<<<<<<< HEAD
     data = {'tweets' : tweets}
     query = request.args.get('query')
     dic = search('kim')
     print(dic)
+=======
+    get_data = request.args.get('query')
+    data = {'tweets' :tweets}
+>>>>>>> 8384409567ac0ac2a7e9741f8c351da156a89779
     return render_template('main.html' , data=data)
 
 @app.route('/compare')
