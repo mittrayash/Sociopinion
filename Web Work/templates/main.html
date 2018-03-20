@@ -78,11 +78,11 @@
     <div class="row">
         <div class="col-sm-3" id="block_type2" >
             <div style="text-align: left; margin-left: 15px;margin-top: 15px">
-
+                <form action="main" method="get">
                 <label for="hashtag_text" style="color: #ffffff;margin-left: 5px;">Hastag Search</label><br>
-                <input type="text" id="hashtag_text" name="hashtag_text" placeholder="Your HashTag.."><br>
-                <button id="search" >Search</button>
-
+                <input type="text" id="hashtag_text" name="query" placeholder="Your HashTag.."><br>
+                <button type="submit" id="search" >Search</button>
+                </form>
             </div>
         </div>
         <div class="col-sm-5" id="block_type2" ></div>
@@ -164,34 +164,7 @@
 
     </script>
 
-    <script>
-        $(document).ready(function() {
 
-        $('#search').click(function (event) {
-            $.ajax({
-                data : {query : 'ajax-' + $("#hashtag_text").val()},
-                type : 'GET',
-                url : '/main'
-            })
-            .done(function(data) {
-
-                console.log(data);
-
-                if (data.error) {
-                    alert("Error");
-                }
-                else {
-                    alert(data['tweets']);
-                }
-
-            });
-
-            event.preventDefault();
-        });
-
-        });
-
-    </script>
 
 
 </body>

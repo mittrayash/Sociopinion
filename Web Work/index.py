@@ -24,19 +24,10 @@ def hello():
 @app.route("/main")
 def main_page():
     query = request.args.get('query')
-    
-    if not query.startswith('ajax-'):
-        lis = search(query, 10)
-        print('Normal')
-        data = {'tweets': lis}
-        return render_template('main.html', data=data)
-    else:
-        print('ajax')
-        temp = query[5:]
-        print(temp)
-        lis = search(temp, 10)
-        data = {'tweets': lis}
-        return data
+    lis = search(query, 10)
+    print('Normal')
+    data = {'tweets': lis}
+    return render_template('main.html', data=data)
 
 @app.route('/compare')
 def comapre_page():
