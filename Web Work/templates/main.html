@@ -166,19 +166,19 @@
 
         $('#search').click(function (event) {
             $.ajax({
-                data : {query : $("#hashtag_text").val()},
+                data : {query : 'ajax-' + $("#hashtag_text").val()},
                 type : 'GET',
                 url : '/main'
             })
             .done(function(data) {
 
-                console.log(data)
+                console.log(data);
 
                 if (data.error) {
                     alert("Error");
                 }
                 else {
-                    alert($('#result').text(data.status));
+                    alert(data['tweets']);
                 }
 
             });
