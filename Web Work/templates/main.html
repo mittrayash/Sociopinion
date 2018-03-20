@@ -53,10 +53,13 @@
     #search:hover {
     background-color: #45a049;
     }
-    ul {
+    #tweets_list {
     background: #DEE5E9;
-    padding: 5px;
+    padding: 0px !important;
     }
+	.links{
+		color: crimson !important;
+	}
     </style>
 </head>
 <body>
@@ -84,21 +87,21 @@
         </div>
         <div class="col-sm-5" id="block_type2" ></div>
         <div class="col-sm-4" id="block_type2" style="overflow:scroll;">
-            <ul id="tweets_list">
+            <div id="tweets_list">
                 {% for item in data['tweets'] %}
                     <div class="row">
                         <div class="col-sm-2">
                             <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
                         </div>
                         <div class="col-sm-10" style="text-align: left">
-                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a href="{{ item['link'] }}">{{ item['username'] }} </a> </h4>
+                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a class='links' href="{{ item['link'] }}">{{ item['username'] }} </a> </h4>
                             <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">{{ item['date'] }}</p>
                             <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item['text'] }}</p>
 
                         </div>
                 </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
       </div>
 
