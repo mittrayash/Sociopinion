@@ -87,10 +87,11 @@ def main_page():
             ,'total_neg' : total_neg ,'avg_pos' : avg_pos
             , 'avg_neg' : avg_neg}
 
-    print(data)
 
     print(lis, counts)
-    data = {'tweets': lis}
+    similar = get_names(query)
+
+    print(similar)
 
     return render_template('main.html', data=data)
 
