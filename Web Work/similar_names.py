@@ -11,7 +11,7 @@ def get_names(query):
         res = x[len(query) + 4:]
         if len(res) > 0:
             count += 1
-            similar.append(res)
+            similar.append(res.title())
         if count == 5:
             break
     return similar

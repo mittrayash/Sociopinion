@@ -25,6 +25,7 @@
         transition: all .5s;
     }
     .btnn:hover{
+        background-color: black;
         color: white !important;
     }
 
@@ -123,7 +124,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-sm-4" id="block_type2" style="overflow:scroll;">
+        <div class="col-sm-4" id="block_type2" style="overflow-y:scroll;">
             <div id="tweets_list">
                 {% for item_out in data['tweets']|reverse %}
                     {% for item_in in item_out|reverse %}
