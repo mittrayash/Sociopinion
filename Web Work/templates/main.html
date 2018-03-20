@@ -2,9 +2,10 @@
 <head>
     <meta charset="utf-8"/>
     <title>Main Page</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     <style>
     body {
      margin:0;
@@ -68,8 +69,8 @@
 
 
 	<div class="row" style="">
-      <div class="col-sm-3" id="block_type1" ><canvas id="data_representation1" width="250%" height="250%"></canvas></div>
-      <div class="col-sm-3" id="block_type1" ><canvas id="data_representation2" width="250%" height="250%"></canvas></div>
+      <div class="col-sm-3" id="block_type1" ><canvas id="data_representation1" width="250%" height="200%"></canvas></div>
+      <div class="col-sm-3" id="block_type1" ><canvas id="data_representation2" width="250%" height="200%"></canvas></div>
       <div class="col-sm-6" id="block_type1" ><canvas id="data_representation3" width="600px" height="250px"></canvas></div>
     </div>
 
@@ -86,82 +87,133 @@
         <div class="col-sm-5" id="block_type2" ></div>
         <div class="col-sm-4" id="block_type2" style="overflow:scroll;">
             <div id="tweets_list">
-                {% for item in data['tweets'] %}
+                {% for item_out in data['tweets']|reverse %}
+                    {% for item_in in item_out|reverse %}
                     <div class="row">
                         <div class="col-sm-2">
                             <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
                         </div>
                         <div class="col-sm-10" style="text-align: left">
-                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a class='links' href="{{ item['link'] }}">{{ item['username'] }} </a> </h4>
-                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">{{ item['date'] }}</p>
-                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item['text'] }}</p>
+                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </h4>
+                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">{{ item_in['date'] }}</p>
+                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item_in['text'] }}</p>
 
                         </div>
                 </div>
+                {% endfor %}
                 {% endfor %}
             </div>
         </div>
       </div>
 
 
-    <script>
+    <script type="text/javascript" language="JavaScript">
 
-    var pieData = [
-        {
-            value: 20,
-            color:"#878BB6"
-        },
-        {
-            value : 40,
-            color : "#4ACAB4"
-        },
-        {
-            value : 10,
-            color : "#FF8153"
-        },
-        {
-            value : 30,
-            color : "#FFEA88"
-        }
-    ];
+    var str_data = '{{ data | tojson | safe  }}' ;
+    var json_data = JSON.parse(str_data) ;
+    console.log(json_data)
 
-    var data_representation1= document.getElementById("data_representation1").getContext("2d");
-    var data_representation2= document.getElementById("data_representation2").getContext("2d");
-    new Chart(data_representation1).Doughnut(pieData);
-    new Chart(data_representation2).Doughnut(pieData);
 
-    var LineData = {
-        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        datasets: [
-            {
-                label: "Prime and Fibonacci",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
-            }
-        ]
+    var pieData1 = {
+      labels: [
+        "Positive",
+        "Neutral",
+        "Negative"
+    ],
+    datasets: [
+        {
+            data: [json_data['total_pos'], json_data['total_neu'], json_data['total_neg']],
+            backgroundColor: [
+                "#FF8153",
+                "#4ACAB4",
+                "#878BB6"
+            ]
+        }]
     };
 
-    var data_representation3 = document.getElementById("data_representation3").getContext("2d");
-    var options = { };
-    new Chart(data_representation3).Line(LineData, options);
+    var options1 = {
+        responsive: true,
+        title: {
+            display: true,
+            position: "top",
+            text: "Categorical Segmentation",
+            fontSize: 15,
+            fontColor: "#ffffff"
+        },
+        legend: {
+            display: false
+        }
+    };
+
+    var data_representation1= document.getElementById("data_representation1").getContext("2d");
+    new Chart(data_representation1, {
+    type: 'doughnut',
+    data: pieData1,
+    options: options1
+    });
+
+    var pieData2 = {
+      labels: [
+        "Positive",
+        "Negative"
+    ],
+    datasets: [
+        {
+            data: [json_data['avg_pos'], json_data['avg_neg']],
+            backgroundColor: [
+                "#FF8153",
+                "#2A2A37"
+            ]
+        }]
+    };
+
+    var options2 = {
+        responsive: true,
+        title: {
+            display: true,
+            position: "top",
+            text: "Popularity",
+            fontSize: 15,
+            fontColor: "#ffffff"
+        },
+        legend: {
+            display: false
+        }
+    };
+
+    var data_representation2 = document.getElementById("data_representation2").getContext("2d");
+    new Chart(data_representation2, {
+    type: 'doughnut',
+    data: pieData2,
+    options: options2
+    });
+
+    new Chart(document.getElementById("data_representation3"), {
+    type: 'line',
+    data: {
+    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    datasets: [{
+        data: json_data['pos_line_data'],
+        label: "Positive",
+        borderColor: "#FF8153",
+        fill: false
+      }, {
+        data: json_data['neg_line_data'],
+        label: "Negative",
+        borderColor: "#4ACAB4",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Sentimental Analysis'
+    }
+  }
+});
 
     </script>
-
 
 
 
