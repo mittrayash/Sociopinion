@@ -8,6 +8,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from datetime import date, timedelta
 import nltk
 from tweeter2 import search
+from similar_names import get_names
 
 app = Flask(__name__)
 
@@ -55,6 +56,10 @@ def main_page():
 
     print(lis, counts)
     data = {'tweets': lis}
+
+
+    
+
     return render_template('main.html', data=data)
 
 @app.route('/compare')
