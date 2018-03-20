@@ -2,13 +2,21 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+def getText():
+    with open('static/dynamic.txt') as f:
+        content = f.readlines()
+    content = [x.strip() for x in content]
+    return content
+
 @app.route("/")
 def hello():
     return render_template('index.html')
 
 @app.route("/main")
 def main_page():
-    return render_template('main.html')
+    tweets = getText()
+    data = {'tweets' : tweets}
+    return render_template('main.html' , data=data)
 
 @app.route('/compare')
 def comapre_page():
