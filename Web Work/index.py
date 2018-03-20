@@ -15,7 +15,7 @@ def getText():
     with open('static/dynamic.txt') as f:
         content = f.readlines()
     content = [x.strip() for x in content]
-    return content
+    return content 
 
 @app.route("/")
 def hello():
@@ -23,13 +23,11 @@ def hello():
 
 @app.route("/main")
 def main_page():
-	max_tweets = 10
     tweets = getText()
-    data = {'tweets' : tweets}
     query = request.args.get('query')
-    lis = search('kim', max_tweets)
+    lis = search('modi', 10)
     print(lis)
-
+    data = {'tweets': lis}
     return render_template('main.html' , data=data)
 
 @app.route('/compare')
