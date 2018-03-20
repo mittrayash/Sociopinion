@@ -143,12 +143,10 @@
 </head>
 <body>
 
-    <div id="backdiv"  style="display: none">
     <div id="loader" style="display: none"></div>
-    </div>
 
 	<div class='row', style='height: 30px; background-color: black;margin-left: 20px;'>
-		<h5 style="color: #ffffff">Sentimental Analysis</h5>
+		<h5 style="color: #ffffff;text-align: center">Sentimental Analysis - #{{ data['name'] }}</h5>
 	</div>
 
 
@@ -352,8 +350,7 @@
 
     var pieData2 = {
       labels: [
-        "Positive",
-        "Negative"
+        "% Popularity"
     ],
     datasets: [
         {
@@ -405,7 +402,7 @@
         data: json_data['pos_line_data'],
         label: "Positive",
         borderColor: "#FF8153",
-        fill: false   
+        fill: false
       }, {
         data: json_data['neg_line_data'],
         label: "Negative",
@@ -428,7 +425,6 @@
     <script>
         function showLoading(){
             document.getElementById("loader").style.display = "block";
-            document.getElementById("backxdiv").style.display = "block";
         }
         function hideLoading(){
             document.getElementById("loader").style.display = "none";

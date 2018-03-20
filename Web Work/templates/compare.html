@@ -102,12 +102,16 @@
         title: {
             display: true,
             position: "top",
-            text: json_data['data1']['name'],
+            text: '#' + json_data['data1']['name'],
             fontSize: 18,
             fontColor: "#ffffff"
         },
         legend: {
-            display: false
+            display: true,
+            position : 'left',
+            labels: {
+                fontColor: 'rgb(255, 255, 255)'
+            }
         }
     };
 
@@ -140,12 +144,16 @@
         title: {
             display: true,
             position: "top",
-            text: json_data['data2']['name'],
+            text: '#' + json_data['data2']['name'],
             fontSize: 18,
             fontColor: "#ffffff"
         },
         legend: {
-            display: false
+            display: true,
+            position : 'left',
+            labels: {
+                fontColor: 'rgb(255, 255, 255)'
+            }
         }
     };
 
