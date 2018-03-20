@@ -6,6 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
     body {
      margin:0;
@@ -190,9 +191,11 @@
             </div>
         </div>
         <div class="col-sm-4" id="block_type2" style="overflow-y:scroll;">
-            <button id="btn_all" onclick="showAllTweet();">All</button>
-            <button id="btn_pos" onclick="showPosTweet();">Positive</button>
-            <button id="btn_neg" onclick="showNegTweet();">Negative</button>
+            <div class="w3-bar">
+              <button id="btn_all" class="w3-bar-item w3-button w3-teal" style="width:33.3%" onclick="showAllTweet();">All</button>
+              <button id="btn_pos" class="w3-bar-item w3-button w3-black" style="width:33.3%" onclick="showPosTweet();">Positive</button>
+              <button id="btn_neg" class="w3-bar-item w3-button w3-black" style="width:33.3%" onclick="showNegTweet();">Negative</button>
+            </div>
 
 
             <div id="all_tweets_list" class="tweets_list">
@@ -431,16 +434,37 @@
             document.getElementById("all_tweets_list").style.display = "block";
             document.getElementById("pos_tweets_list").style.display = "none";
             document.getElementById("neg_tweets_list").style.display = "none";
+            document.getElementById("btn_all").classList.remove('w3-black');
+            document.getElementById("btn_all").classList.add('w3-teal');
+
+            document.getElementById("btn_pos").classList.remove('w3-teal');
+            document.getElementById("btn_pos").classList.add('w3-black');
+            document.getElementById("btn_neg").classList.remove('w3-teal');
+            document.getElementById("btn_neg").classList.add('w3-black');
         }
         function showPosTweet() {
             document.getElementById("all_tweets_list").style.display = "none";
             document.getElementById("pos_tweets_list").style.display = "block";
             document.getElementById("neg_tweets_list").style.display = "none";
+            document.getElementById("btn_pos").classList.remove('w3-black');
+            document.getElementById("btn_pos").classList.add('w3-teal');
+
+            document.getElementById("btn_all").classList.remove('w3-teal');
+            document.getElementById("btn_all").classList.add('w3-black');
+            document.getElementById("btn_neg").classList.remove('w3-teal');
+            document.getElementById("btn_neg").classList.add('w3-black');
         }
         function showNegTweet() {
             document.getElementById("all_tweets_list").style.display = "none";
             document.getElementById("pos_tweets_list").style.display = "none";
             document.getElementById("neg_tweets_list").style.display = "block";
+            document.getElementById("btn_neg").classList.remove('w3-black');
+            document.getElementById("btn_neg").classList.add('w3-teal');
+
+            document.getElementById("btn_pos").classList.remove('w3-teal');
+            document.getElementById("btn_pos").classList.add('w3-black');
+            document.getElementById("btn_all").classList.remove('w3-teal');
+            document.getElementById("btn_all").classList.add('w3-black');
         }
     </script>
 
