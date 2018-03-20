@@ -151,11 +151,32 @@
     </script>
 
     <script>
-        $(document).ready(function(){
-            $("#search").click(function(){
-                console.log($("#hashtag_text").val())
+        $(document).ready(function() {
+
+        $('#search').click(function (event) {
+            $.ajax({
+                data : {query : $("#hashtag_text").val()},
+                type : 'GET',
+                url : '/main'
+            })
+            .done(function(data) {
+
+                console.log(data)
+
+                if (data.error) {
+                    alert("Error");
+                }
+                else {
+                    alert($('#result').text(data.status));
+                }
+
             });
+
+            event.preventDefault();
         });
+
+        });
+
     </script>
 
 

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -16,6 +16,7 @@ def hello():
 def main_page():
     tweets = getText()
     data = {'tweets' : tweets}
+    get_data = request.args.get('query')
     return render_template('main.html' , data=data)
 
 @app.route('/compare')
