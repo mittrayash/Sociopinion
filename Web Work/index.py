@@ -21,7 +21,7 @@ def hello():
 @app.route("/main")
 def main_page():
     query = request.args.get('query')
-    max_items = 100  # request.args.get('max_items')
+    max_items = 50  # request.args.get('max_items')
 
     final_list = []
     final_count = []
@@ -42,7 +42,7 @@ def main_page():
         date_start = datetime.now() - timedelta(days=N)
         date_until = datetime.now() - timedelta(days=N - 2)
 
-        lis, counts = search(api, query, 1, date_start, date_until)
+        lis, counts = search(api, query, max_items, date_start, date_until)
         print(counts)
 
         final_list.append(lis)
@@ -95,8 +95,17 @@ def compare_page():
     with open('data.json' , 'r') as data_file:
         data1 = json.load(data_file)
 
-    query = request.args.get('query')
-    max_items = 100  # request.args.get('max_items')
+    btn = request.args.get('btn')
+    comp_data = request.args.get('comp_data')
+
+    query = ''
+
+    if (btn):
+        query = btn
+    else:
+        query = comp_data
+
+    max_items = 50  # request.args.get('max_items')
 
     final_list = []
     final_count = []
@@ -117,7 +126,7 @@ def compare_page():
         date_start = datetime.now() - timedelta(days=N)
         date_until = datetime.now() - timedelta(days=N - 2)
 
-        lis, counts = search(api, query, 23, date_start, date_until)
+        lis, counts = search(api, query, max_items, date_start, date_until)
         print(counts)
 
         final_list.append(lis)

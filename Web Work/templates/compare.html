@@ -57,7 +57,8 @@
 <body>
 
 	<div class='row', style='height: 10%; background-color: black;margin-left: 20px;'>
-		<h5 style="color: #ffffff">Sentimental Analysis</h5>
+		<h4 style="color: #ffffff;text-align: center">Sentimental Comparison</h4><br>
+        <h5 style="color: #ffffff;text-align: center">{{ final_data['data1']['name'] }} VS {{ final_data['data2']['name'] }}</h5>
 	</div>
 
 
@@ -67,7 +68,7 @@
             <canvas id="data_representation2" width="250%" height="150%"></canvas>
         </div>
         <div class="col-sm-8 block_type1"  style="height: 100%">
-            <canvas id="data_representation3" width="30%" height="30%"></canvas>   
+            <canvas id="data_representation3" width="800px" height=550px></canvas>
         </div>
     </div>
 
@@ -185,6 +186,7 @@
     ]
   },
   options: {
+        responsive: false ,
     title: {
       display: true,
       text: 'Sentimental Analysis'
