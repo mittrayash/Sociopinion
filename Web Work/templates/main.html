@@ -27,7 +27,27 @@
       text-align: center;
       border: cadetblue 1px solid;
     }
-
+    input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+    #search {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+    #search:hover {
+    background-color: #45a049;
+    }
     ul li {
     background: #cce5ff;
     margin: 5px;
@@ -53,9 +73,13 @@
 
     <div class="row">
         <div class="col-sm-3" id="block_type2" >
-            <form>
+            <div style="text-align: left; margin-left: 15px;margin-top: 15px">
 
-            </form>
+                <label for="hashtag_text" style="color: #ffffff;margin-left: 5px;">Hastag Search</label><br>
+                <input type="text" id="hashtag_text" name="hashtag_text" placeholder="Your HashTag.."><br>
+                <button id="search" >Search</button>
+
+            </div>
         </div>
         <div class="col-sm-5" id="block_type2" ></div>
         <div class="col-sm-4" id="block_type2" style="overflow:scroll;">
@@ -124,6 +148,14 @@
     var options = { };
     new Chart(data_representation3).Line(LineData, options);
 
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#search").click(function(){
+                console.log($("#hashtag_text").val())
+            });
+        });
     </script>
 
 
