@@ -8,6 +8,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from datetime import date, timedelta
 import nltk
 from tweeter2 import search
+from similar_names import get_names
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -86,6 +87,9 @@ def main_page():
             , 'avg_neg' : avg_neg}
 
     print(data)
+
+    print(lis, counts)
+    data = {'tweets': lis}
 
     return render_template('main.html', data=data)
 
