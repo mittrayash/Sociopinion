@@ -15,8 +15,8 @@ def hello():
 @app.route("/main")
 def main_page():
     tweets = getText()
-    data = {'tweets' : tweets}
     get_data = request.args.get('query')
+    data = {'tweets' :tweets}
     return render_template('main.html' , data=data)
 
 @app.route('/compare')

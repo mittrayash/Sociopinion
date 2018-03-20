@@ -85,7 +85,16 @@
         <div class="col-sm-4" id="block_type2" style="overflow:scroll;">
             <ul id="tweets_list">
                 {% for item in data['tweets'] %}
-                    <li>{{ item }}</li>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
+                        </div>
+                        <div class="col-sm-10" style="text-align: left">
+                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by">From User</h4>
+                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">vjbfvhj</p>
+                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item }}</p>
+                        </div>
+                </div>
                 {% endfor %}
             </ul>
         </div>
