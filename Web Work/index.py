@@ -24,8 +24,8 @@ def hello():
 @app.route("/main")
 def main_page():
     query = request.args.get('query')
-    lis, ss = search(query, 100)
-    print(ss)
+    lis, counts = search(query, 100)
+    print(lis, counts)
     data = {'tweets': lis}
     return render_template('main.html', data=data)
 
