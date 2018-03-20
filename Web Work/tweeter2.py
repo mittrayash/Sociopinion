@@ -5,31 +5,20 @@ import pandas as pd
 import datetime
 import re
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from datetime import date, timedelta   
+from datetime import date, timedelta
 import nltk
 import time
 
 
-def search(query, max_items):
-    consumer_key = 'AYDNqr9ycBI9qaOWoYXJgYnKY'
-    consumer_secret = 'tSHVPOr6JrQ9KNnqX1aSOGnKecmPeQQ37j81JAURI0t6deb8AA'
-    access_token = '2493864625-SSCalZj2of8hITNgrv4gMvNZX7seGTSWD2MQI0H'
-    access_token_secret = '5JBwqg2jWjijXgIRpEsdLrGRYWEuNmc4M0ibfRL2xzrhd'
-
-    hashtagtweet = query
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True)
-
-    nltk.download('vader_lexicon')
-
-    now = datetime.datetime.now()
-    enddate = now.date()
-    startdate = enddate - timedelta(10)
+def search(api, query, max_items, startdate, enddate):
     lis = []
     counts = {'Positive': 0, 'Neutral': 0, 'Negative': 0}
 
-    for i, tweet in enumerate(tweepy.Cursor(api.search, q=hashtagtweet, count=100,lang="en",since=startdate, until=enddate).items(max_items)):
+    start_date = startdate.strftime('%Y-%m-%d')
+    end_date = enddate.strftime('%Y-%m-%d')
+
+    for i, tweet in enumerate(
+            tweepy.Cursor(api.search, q=query, count=100, lang="en", since=start_date, until=end_date).items(max_items)):
         pos = 0
         neg = 0
         neu = 0
@@ -53,12 +42,11 @@ def search(query, max_items):
             d = 'Positive'
             counts['Positive'] += 1
         elif pos < neg:
-             d = 'Negative'
-             counts['Negative'] += 1
+            d = 'Negative'
+            counts['Negative'] += 1
         else:
             d = 'Neutral'
             counts['Neutral'] += 1
 
         lis.append({'id': i, 'username': username, 'link': link, 'text': sentence, 'date': date, 'inference': d})
     return lis, counts
-
