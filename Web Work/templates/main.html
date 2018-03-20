@@ -53,9 +53,10 @@
     #search:hover {
     background-color: #45a049;
     }
-    ul {
+    #tweets_list {
     background: #DEE5E9;
-    padding: 5px;
+    padding: 0px !important;
+	
     }
     </style>
 </head>
@@ -84,7 +85,7 @@
         </div>
         <div class="col-sm-5" id="block_type2" ></div>
         <div class="col-sm-4" id="block_type2" style="overflow:scroll;">
-            <ul id="tweets_list">
+            <div id="tweets_list">
                 {% for item in data['tweets'] %}
                     <div class="row">
                         <div class="col-sm-2">
@@ -97,7 +98,7 @@
                         </div>
                 </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
       </div>
 
