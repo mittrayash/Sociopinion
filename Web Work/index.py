@@ -24,13 +24,13 @@ def hello():
 @app.route("/main")
 def main_page():
 	max_tweets = 10
-    tweets = getText()
-    data = {'tweets' : tweets}
-    query = request.args.get('query')
-    lis = search('kim', max_tweets)
-    print(lis)
+	tweets = getText()
+	data = {'tweets' : tweets}
+	query = request.args.get('query')
+	lis = search('kim', max_tweets)
+	print(lis)
 
-    return render_template('main.html' , data=data)
+	return render_template('main.html' , data=data)
 
 @app.route('/compare')
 def comapre_page():
