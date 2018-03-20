@@ -1,4 +1,13 @@
 from flask import Flask, render_template, request
+import tweepy
+import numpy as np
+import pandas as pd
+import datetime
+import re
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from datetime import date, timedelta
+import nltk
+from tweeter2 import search
 
 app = Flask(__name__)
 
@@ -16,7 +25,9 @@ def hello():
 def main_page():
     tweets = getText()
     data = {'tweets' : tweets}
-    get_data = request.args.get('query')
+    query = request.args.get('query')
+    dic = search('kim')
+    print(dic)
     return render_template('main.html' , data=data)
 
 @app.route('/compare')
