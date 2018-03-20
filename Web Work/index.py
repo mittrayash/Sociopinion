@@ -69,7 +69,6 @@ def main_page():
     total_neu = 0
     total_neg = 0
     avg_pos = 0
-    avg_neu = 0
     avg_neg = 0
 
     for i in range(len(final_count)):
