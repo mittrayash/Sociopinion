@@ -21,7 +21,7 @@ def hello():
 @app.route("/main")
 def main_page():
     query = request.args.get('query')
-    max_items = 50  # request.args.get('max_items')
+    max_items = 20  # request.args.get('max_items')
 
     final_list = []
     final_count = []
@@ -84,6 +84,8 @@ def main_page():
             , 'total_pos' : total_pos , 'total_neu' : total_neu
             ,'total_neg' : total_neg ,'avg_pos' : avg_pos
             , 'avg_neg' : avg_neg ,  'name' : query , 'dates' : dates}
+
+    print(data)
 
     with open('data.json', 'w') as outfile:
         json.dump(data, outfile)

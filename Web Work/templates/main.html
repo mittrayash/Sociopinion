@@ -70,7 +70,7 @@
     #search:hover {
     background-color: #45a049;
     }
-    #tweets_list {
+    .tweets_list {
     background: #DEE5E9;
     padding: 0px !important;
     }
@@ -78,8 +78,69 @@
 		color: crimson !important;
 	}
     </style>
+
+    <style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+#backdiv {
+	position:absolute;
+    background-color: rgba(93, 91, 86, 0.58);
+    width: 100%;
+    height:100%;
+}
+</style>
+
 </head>
 <body>
+
+    <div id="backdiv"  style="display: none">
+    <div id="loader" style="display: none"></div>
+    </div>
 
 	<div class='row', style='height: 30px; background-color: black;margin-left: 20px;'>
 		<h5 style="color: #ffffff">Sentimental Analysis</h5>
@@ -98,7 +159,7 @@
                 <form action="main" method="get">
                 <label for="hashtag_text" style="color: #ffffff;margin-left: 5px;">Hastag Search</label><br>
                 <input type="text" id="hashtag_text" name="query" placeholder="Your HashTag.."><br>
-                <button type="submit" id="search" >Search</button>
+                <button type="submit" onclick="showLoading();" id="search" >Search</button>
                 </form>
             </div>
         </div>
@@ -111,21 +172,26 @@
 
                     {% for choice in similar %}
                         <div class="choice">
-                            <input type="submit" name="btn" class="btnn" style="color: grey" value="{{ choice }}" />
+                            <input type="submit" onclick="showLoading();" name="btn" class="btnn" style="color: grey" value="{{ choice }}" />
                         </div>
                     {% endfor %}
                     </div>
                     <div class="col-sm-4">
                         <h3 style='color: white;font-family: sans-serif;'>Or Enter Your Own:</h3>
                         <input type="text" name="comp_data">
-                        <input type="submit" class="btnn" style="color: grey">
+                        <input type="submit" onclick="showLoading();" class="btnn" style="color: grey">
 
                     </div>
                 </form>
             </div>
         </div>
         <div class="col-sm-4" id="block_type2" style="overflow-y:scroll;">
-            <div id="tweets_list">
+            <button id="btn_all" onclick="showAllTweet();">All</button>
+            <button id="btn_pos" onclick="showPosTweet();">Positive</button>
+            <button id="btn_neg" onclick="showNegTweet();">Negative</button>
+
+
+            <div id="all_tweets_list" class="tweets_list">
                 {% for item_out in data['tweets']|reverse %}
                     {% for item_in in item_out|reverse %}
                     <div class="row">
@@ -142,6 +208,48 @@
                 {% endfor %}
                 {% endfor %}
             </div>
+
+            <div id="pos_tweets_list" class="tweets_list" style="display: none;">
+                {% for item_out in data['tweets']|reverse %}
+                    {% for item_in in item_out|reverse %}
+                    {% if item_in['inference'] == 'Positive' %}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
+                        </div>
+                        <div class="col-sm-10" style="text-align: left">
+                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </h4>
+                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">{{ item_in['date'] }}</p>
+                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item_in['text'] }}</p>
+
+                        </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+            </div>
+
+            <div id="neg_tweets_list" class="tweets_list" style="display: none;">
+                {% for item_out in data['tweets']|reverse %}
+                    {% for item_in in item_out|reverse %}
+                {% if item_in['inference'] == 'Negative' %}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
+                        </div>
+                        <div class="col-sm-10" style="text-align: left">
+                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </h4>
+                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">{{ item_in['date'] }}</p>
+                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item_in['text'] }}</p>
+
+                        </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+            </div>
+
+
         </div>
       </div>
 
@@ -303,6 +411,34 @@
 
     </script>
 
+
+    <script>
+        function showLoading(){
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("backxdiv").style.display = "block";
+        }
+        function hideLoading(){
+            document.getElementById("loader").style.display = "none";
+        }
+    </script>
+
+    <script>
+        function showAllTweet() {
+            document.getElementById("all_tweets_list").style.display = "block";
+            document.getElementById("pos_tweets_list").style.display = "none";
+            document.getElementById("neg_tweets_list").style.display = "none";
+        }
+        function showPosTweet() {
+            document.getElementById("all_tweets_list").style.display = "none";
+            document.getElementById("pos_tweets_list").style.display = "block";
+            document.getElementById("neg_tweets_list").style.display = "none";
+        }
+        function showNegTweet() {
+            document.getElementById("all_tweets_list").style.display = "none";
+            document.getElementById("pos_tweets_list").style.display = "none";
+            document.getElementById("neg_tweets_list").style.display = "block";
+        }
+    </script>
 
 
 </body>

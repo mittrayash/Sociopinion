@@ -11,9 +11,70 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
     
     <link rel="stylesheet" href="{{ url_for('static',filename='css/aos.css') }}">
+
+    <style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+#backdiv {
+	position:absolute;
+    background-color: rgba(93, 91, 86, 0.58);
+    width: 100%;
+    height:100%;
+}
+</style>
+
 </head>
 
 <body>
+
+    <div id="backdiv"  style="display: none">
+    <div id="loader" style="display: none"></div>
+    </div>
+
     <div class="jumbotron jumbotron-fluid" id="banner" style="background-image: url('{{ url_for('static',filename='img/banner-bk.jpg') }}');">
         <div class="container text-center text-md-left">
             <header>
@@ -35,16 +96,15 @@
 			<div class='col-sm-6'>
 			<form action='main' method='get' class='col-sm-4'>
 				<input type='text' name='query'>
-				<button type='submit' data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold atlas-cta cta-green">Get Started</button>
+				<button type='submit' onclick="showLoading();" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold atlas-cta cta-green">Get Started</button>
 				
 			</form>
-			</div>
-			<div class='col-sm-6'>
-            <a href="compare" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold atlas-cta cta-green">Compare</a>
 			</div>
 			</div>
         </div>
     </div>
+
+
 
     <!-- AOS -->
     <script src="{{ url_for('static',filename='js/aos.js') }}"></script>
@@ -52,6 +112,14 @@
       AOS.init({
       });
     </script>
+
+    <script>
+        function showLoading(){
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("backdiv").style.display = "block";
+        }
+    </script>
+
 </body>
 
 </html>
