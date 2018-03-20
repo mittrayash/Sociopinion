@@ -47,7 +47,7 @@ def main_page():
         date_start = datetime.now() - timedelta(days=N)
         date_until = datetime.now() - timedelta(days=N - 2)
 
-        lis, counts = search(api, query, 23, date_start, date_until)
+        lis, counts = search(api, query, 1, date_start, date_until)
         print(counts)
 
         final_list.append(lis)
@@ -90,9 +90,9 @@ def main_page():
     print(lis, counts)
     similar = get_names(query)
 
-    print(similar)
 
-    return render_template('main.html', data=data)
+
+    return render_template('main.html', data=data, similar=similar)
 
 @app.route('/compare')
 def compare_page():

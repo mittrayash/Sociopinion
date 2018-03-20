@@ -12,6 +12,23 @@
      padding:0;
      background-color: #2A2A37;
     }
+    .btnn {
+        background: #222110 no-repeat 9px center;
+        border: solid 1px black;
+        padding: 9px 10px 9px 32px;
+        width: 100%;
+        -webkit-border-radius: 10em;
+        -moz-border-radius: 10em;
+        border-radius: 10em;
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        transition: all .5s;
+    }
+    .btnn:hover{
+        color: white !important;
+    }
+
+
     #block_type1{
       height:40%;
       background-color: #2A2A37;
@@ -84,7 +101,28 @@
                 </form>
             </div>
         </div>
-        <div class="col-sm-5" id="block_type2" ></div>
+        <div class="col-sm-5" id="block_type2" >
+
+            <h2 style='color: white;font-family: sans-serif;'> Compare with ...</h2>
+            <div class="row">
+                <form action="compare.html" method="get">
+                    <div class="col-sm-6 col-sm-offset-1 col-sm-pull-1">
+
+                    {% for choice in similar %}
+                        <div class="choice">
+                            <input type="submit" name="comp_data" class="btnn" style="color: grey" value="{{ choice }}" />
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <div class="col-sm-4">
+                        <h3 style='color: white;font-family: sans-serif;'>Or Enter Your Own:</h3>
+                        <input type="text" name="comp_data">
+                        <input type="submit" class="btnn" style="color: grey">
+
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="col-sm-4" id="block_type2" style="overflow:scroll;">
             <div id="tweets_list">
                 {% for item_out in data['tweets']|reverse %}
