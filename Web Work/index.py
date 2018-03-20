@@ -36,11 +36,15 @@ def main_page():
     api = tweepy.API(auth, wait_on_rate_limit=True)
 
     #nltk.download('vader_lexicon')
+    dates = []
 
     for i in range(10):
         N = 10 - i
         date_start = datetime.now() - timedelta(days=N)
+        date_now = datetime.now() - timedelta(days=N - 1)
         date_until = datetime.now() - timedelta(days=N - 2)
+
+        dates.append(date_now.strftime('%d %b'))
 
         lis, counts = search(api, query, max_items, date_start, date_until)
         print(counts)
@@ -79,7 +83,7 @@ def main_page():
             , 'neu_line_data' : neu_line_graph_list , 'neg_line_data' : neg_line_graph_list
             , 'total_pos' : total_pos , 'total_neu' : total_neu
             ,'total_neg' : total_neg ,'avg_pos' : avg_pos
-            , 'avg_neg' : avg_neg ,  'name' : query}
+            , 'avg_neg' : avg_neg ,  'name' : query , 'dates' : dates}
 
     with open('data.json', 'w') as outfile:
         json.dump(data, outfile)
@@ -120,10 +124,14 @@ def compare_page():
     api = tweepy.API(auth, wait_on_rate_limit=True)
 
     # nltk.download('vader_lexicon')
-
+    dates = []
     for i in range(10):
         N = 10 - i
         date_start = datetime.now() - timedelta(days=N)
+        date_now = datetime.now() - timedelta(days=N-1)
+
+        dates.append(date_now.strftime('%d %b'))
+
         date_until = datetime.now() - timedelta(days=N - 2)
 
         lis, counts = search(api, query, max_items, date_start, date_until)
@@ -163,7 +171,7 @@ def compare_page():
         , 'neu_line_data': neu_line_graph_list, 'neg_line_data': neg_line_graph_list
         , 'total_pos': total_pos, 'total_neu': total_neu
         , 'total_neg': total_neg, 'avg_pos': avg_pos
-        , 'avg_neg': avg_neg , 'name' : query}
+        , 'avg_neg': avg_neg , 'name' : query , 'dates' : dates}
 
     final_data = {'data1' : data1 , 'data2' : data2}
 

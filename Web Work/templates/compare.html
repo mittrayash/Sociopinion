@@ -159,7 +159,7 @@
     new Chart(document.getElementById("data_representation3"), {
     type: 'line',
     data: {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    labels: json_data['data1']['dates'],
     datasets: [{
         data: json_data['data1']['pos_line_data'],
         label: json_data['data1']['name'] + " Positive",
@@ -169,7 +169,8 @@
         data: json_data['data1']['neg_line_data'],
         label: json_data['data1']['name'] + " Negative",
         borderColor: "#4ACAB4",
-        fill: false
+        fill: false,
+        showLine : false
       },
       {
         data: json_data['data2']['pos_line_data'],
@@ -181,7 +182,8 @@
         data: json_data['data2']['neg_line_data'],
         label: json_data['data2']['name'] + " Negative",
         borderColor: "#7ea9b6",
-        fill: false
+        fill: false,
+        showLine : false
       }
     ]
   },
