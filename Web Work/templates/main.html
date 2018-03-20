@@ -13,6 +13,9 @@
      padding:0;
      background-color: #2A2A37;
     }
+    .choice{
+        padding-bottom: 5%;
+    }
     .btnn {
         background: #222110 no-repeat 9px center;
         border: solid 1px black;
@@ -24,6 +27,7 @@
         -webkit-transition: all .5s;
         -moz-transition: all .5s;
         transition: all .5s;
+        padding-bottom: 2%;
     }
     .btnn:hover{
         background-color: black;
@@ -202,8 +206,8 @@
                             <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
                         </div>
                         <div class="col-sm-10" style="text-align: left">
-                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </h4>
-                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">{{ item_in['date'] }}</p>
+                            <span style="color: crimson;font-weight:bold;font-size: large" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </span>
+                            <span style="color: #464a4c;margin-left: 10px; color: grey;" id="tweet_created_on" class="tweet_created_on">{{ item_in['date'] }}</span>
                             <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item_in['text'] }}</p>
 
                         </div>
