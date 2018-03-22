@@ -1,3 +1,7 @@
+# Sociopinion
+### The Dynamic Voice of The Society
+
+Live now on http://yashmittra.pythonanywhere.com
 
 Make the best of your decisions by comparing the society's outlook on the world around you today!  
 Sociopinion is the Social Opinion of the society today. Learn what people think of products, politicians, restaurants, localities and more.. The possibilities are endless!  
