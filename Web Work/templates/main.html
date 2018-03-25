@@ -263,7 +263,6 @@
 
     var str_data = '{{ data | tojson | safe  }}' ;
     var json_data = JSON.parse(str_data) ;
-    console.log(json_data)
 
      Chart.pluginService.register({
      beforeDraw: function (chart) {
@@ -468,6 +467,12 @@
             document.getElementById("btn_all").classList.remove('w3-teal');
             document.getElementById("btn_all").classList.add('w3-black');
         }
+
+        // local storage
+
+        var t1 = '{{ data | tojson | safe  }}'
+        localStorage.setItem("data", t1);
+
     </script>
 
 

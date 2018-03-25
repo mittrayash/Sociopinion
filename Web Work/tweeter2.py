@@ -1,14 +1,8 @@
-from flask import Flask, render_template, request
 import tweepy
-import numpy as np
-import pandas as pd
-import datetime
 import re
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from datetime import date, timedelta
-import nltk
-import time
-
+# from nltk.sentiment.vader import SentimentIntensityAnalyzer
+# import nltk
+from textblob import TextBlob
 
 def search(api, query, max_items, startdate, enddate):
     lis = []
@@ -29,19 +23,19 @@ def search(api, query, max_items, startdate, enddate):
         username = user.screen_name
         link = 'https://twitter.com/' + username
 
-        sid = SentimentIntensityAnalyzer()
+        # sid = SentimentIntensityAnalyzer()
+
         sentence = re.sub('[^ a-zA-Z0-9' ']', '', sentence)
         sentence = sentence.lower()
-        sentence1 = [tweet.text]
-        for s in sentence1:
-            ss = sid.polarity_scores(s)
-            pos = pos + ss['pos']
-            neg = neg + ss['neg']
-            neu = neu + ss['neu']
-        if pos > neg:
+        # sentence1 = [tweet.text]
+
+        test = TextBlob(sentence)
+        pol = test.sentiment.polarity
+
+        if pol > 0.0:
             d = 'Positive'
             counts['Positive'] += 1
-        elif pos < neg:
+        elif pol < 0.0:
             d = 'Negative'
             counts['Negative'] += 1
         else:
