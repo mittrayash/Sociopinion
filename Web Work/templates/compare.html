@@ -33,25 +33,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     }
-    #search {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin-top: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    }
-    #search:hover {
-    background-color: #45a049;
-    }
-    #tweets_list {
-    background: #DEE5E9;
-    padding: 0px !important;
-    }
-	.links{
-		color: crimson !important;
-	}
+
     </style>
 </head>
 <body>
@@ -98,7 +80,7 @@
     ],
     datasets: [
         {
-            data: [data1_pos / total1, data1_neu / total1, data1_neg / total1],
+            data: [((data1_pos / total1)*100).toString() + '%', ((data1_neu / total1)*100).toString() + '%', ((data1_neg / total1)*100).toString() + '%'],
             backgroundColor: [
                 "#FF8153",
                 "#4ACAB4",
@@ -145,7 +127,7 @@
     ],
     datasets: [
         {
-            data: [(data2_pos / total2).toString() + '%', (data2_neu / total2).toString() + '%', (data2_neg / total2).toString() + '%'],
+            data: [((data2_pos / total2)*100).toString() + '%', ((data2_neu / total2)*100).toString() + '%', ((data2_neg / total2)*100).toString() + '%'],
             backgroundColor: [
                 "#FF8153",
                 "#4ACAB4",
