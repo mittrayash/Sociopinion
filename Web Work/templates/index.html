@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Sociopinion - The Dynamic Voice of The Society</title>
-    <meta name="description" content="Free bootstrap template Atlas">
-    <link rel="icon" href="{{ url_for('static',filename='img/favicon.png') }}" sizes="32x32" type="image/png">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
-    
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/aos.css') }}">
-    <style>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Sociopinion</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel=stylesheet type='text/css' href="{{ url_for('static', filename='css/main.css') }}"/>
+        <link rel=stylesheet type='text/css' href="{{  url_for('static',filename='font-awesome-4.7.0/css/font-awesome.min.css') }}"/>
+        <link rel=stylesheet type='text/css' href="{{ url_for('static', filename='css/custom.css') }}"/>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116313721-1"></script>
+	</head>
+<style>
 /* Center the loader */
 #loader {
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: 1;
+  z-index: 10;
   width: 150px;
   height: 150px;
   margin: -75px 0 0 -75px;
@@ -65,60 +63,143 @@
     height:100%;
 }
 </style>
-
-</head>
-
-<body>
-
-    <div id="backdiv"  style="display: none">
-    <div id="loader" style="display: none"></div>
-    </div>
-
-    <div class="jumbotron jumbotron-fluid" id="banner" style="background-image: url('{{ url_for('static',filename='img/banner-bk.jpg') }}');">
-        <div class="container text-center text-md-left">
-            <header>
-                <div class="row justify-content-between">
-                    <div class="col-2">
-                        <img src="{{ url_for('static',filename='img/logo.png') }}" alt="logo">
-                    </div>
-                </div>
-            </header>
-            <h1 data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="display-3 text-white font-weight-bold my-5">
-            	Sociopinion<br>
-            	Making lives simpler<br>
-            </h1>
-            <p data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="lead text-white my-4" style="padding-left: 5%; padding-bottom: 20px;">
-
-				The Dynamic Voice of Society            </p>
-			
-			<div class='row'>
-			<div class='col-sm-6'>
-			<form action='main' method='get' class='col-sm-4'>
-				<input type='text' name='query'>
-				<button type='submit' onclick="showLoading();" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold atlas-cta cta-green">Get Started</button>
-				
-			</form>
-			</div>
-			</div>
-        </div>
-    </div>
-
-
-
-    <!-- AOS -->
-    <script src="{{ url_for('static',filename='js/aos.js') }}"></script>
     <script>
-      AOS.init({
-      });
+      if (performance.navigation.type == 1) {
+        console.info( "This page is reloaded" );
+      } else {
+        console.info( "This page is not reloaded");
+      }
     </script>
+	<body onload="sendAnalytics();">
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+
+					<nav id="nav">
+						<a href="">Home</a>
+						<a href="#about">About</a>
+						<a href="#footer">Contact</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- Banner -->
+			<section id="banner" style="background-image:url(/static/img/banner.jpg)">
+				<div class="inner">
+					<header>
+						<h1>Welcome to Sociopinion</h1><div id="loader" style="display: none;"></div>
+					</header>
+
+					
+
+					<footer>
+						<p style="padding-bottom: 5%;"> The Dynamic Voice of Society Today</p>
+
+						<form method="get" action="main" onsubmit="disableElements();">
+						<div style="margin-right:30%; margin-left:30%;">
+							<div class="row uniform" >
+								<div class="9u 12u$(small)">
+									<input type="text" name="query" id="query" value="" placeholder="Start With a HashTag..." required/>
+								</div>
+								<div class="3u$ 12u$(small)">
+									<input type="submit" id="start_btn" value="Search" class="fit" />
+								</div>
+							</div>
+						</div>
+						</form>
+					</footer>
+				</div>
+			</section>
+
+
+		<!-- Three -->
+			<section id="about" class="wrapper align-center" style="margin-top:-5%;">
+				<div class="inner">
+					<header>
+						<h2>About</h2>
+						<p>About The Project</p>
+					</header>
+
+					<p style="text-align:left;"><span class="image left"><img src="/static/img/pic01.jpg" alt="" /></span>In the past few years, there has been a huge growth in the use of microblogging platforms such as Twitter. Spurred by that growth, companies and media organizations are increasingly seeking ways to mine Twitter for information about what products and services. Sentiment analysis is extremely useful in social media monitoring as it allows us to gain an overview of the wider public opinion behind certain topics. These Social media monitoring tools make that process quicker and easier than ever before, thanks to real-time monitoring capabilities. The applications of sentiment analysis are broad and powerful. The ability to extract insights from social data is a practice that is being widely adopted by organisations across the world.<br>Our Motive is to Make the best of your decisions by comparing the society's outlook on the world around you today! Sociopinion is the Social Opinion of the society today. Learn what people think of products, politicians, restaurants, localities and more.. The possibilities are endless!<br>No matter what the domain, we always require compare and contrast in order to make an informed decision. Sociopinion leverages the power of society to provide a concise statistical overview of the items being compared. Even better, you can use Sociopinion to<br><strong>Track the popularity of a trend!</strong><br>A restaurant? You want the best food with minimal cost. A locality? You want a posh area devoid of certain issues.<br><strong>Placate the implacable!</strong><br>Target the people who have shown a negative disposition on your product and potentially change them into positive reviews.<br><strong>Find and compare similar people/softwares from the same domain!</strong><br>Sociopinion provides CONCLUSIVE result where the user can analyze the society's opinion in ONE go. It is not easy to analyze thousands of reviews when one gets overwhelmed by the large amount of opinions guiding him into different directions only to produce even more ambiguity in his mind. That Changes Today.</p>
+
+					<header>
+						<p>About The Developer</p>
+						<p>Find me on my portfolio website here: <a href="https://mittrayash.github.io"> Portfolio - Yash Mittra</a></p>
+					</header>
+					<ul class="icons" style="text-align:center;margin-bottom:-5%;margin-top:-3%;">
+
+						<li><a href="https://github.com/mittrayash" class="icon fa-github"><span class="label">Github</span></a></li>
+
+					</ul>
+
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+
+					<h3>Get in touch</h3>
+
+					<form action="feedback" id="feedback_form" method="post">
+
+						<div class="field half first">
+							<label for="name">Name</label>
+							<input name="name" id="name" type="text" placeholder="Name" required>
+						</div>
+						<div class="field half">
+							<label for="email">Email</label>
+							<input name="email" id="email" type="email" placeholder="Email" required>
+						</div>
+						<div class="field">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" rows="6" placeholder="Message" required></textarea>
+						</div>
+						<ul class="actions">
+							<li><input value="Send Message" class="button alt" type="submit" style="width:120%;"></li>
+						</ul>
+					</form>
+
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="/static/js/jquery.min.js"></script>
+			<script src="/static/js/skel.min.js"></script>
+			<script src="/static/js/util.js"></script>
+			<script src="/static/js/main.js"></script>
+
 
     <script>
-        function showLoading(){
+        function disableElements() {
+            document.getElementById("start_btn").disabled = true;
+            showLoading();
+        }
+        function showLoading() {
             document.getElementById("loader").style.display = "block";
-            document.getElementById("backdiv").style.display = "block";
+        }
+        function resetForm() {
+            var name = document.getElementById("name").innerHTML = '';
         }
     </script>
 
-</body>
+
+    <script>
+        function sendAnalytics() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', "UA-116313721-1");
+          //console.log('Analytics Send!');
+        }
+
+    </script>
+
+
+	</body>
+
+
 
 </html>

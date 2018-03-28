@@ -71,7 +71,7 @@
     var data1_neu = json_data1['total_neu'];
     var data1_neg = json_data1['total_neg'];
     var total1 = data1_pos + data1_neg + data1_neu;
-
+console.log(((data1_pos / total1)*100).toString() + '%')
     var pieData1 = {
       labels: [
         "Positive",
@@ -80,7 +80,7 @@
     ],
     datasets: [
         {
-            data: [((data1_pos / total1)*100).toString() + '%', ((data1_neu / total1)*100).toString() + '%', ((data1_neg / total1)*100).toString() + '%'],
+            data: [((data1_pos / total1)*100), ((data1_neu / total1)*100), ((data1_neg / total1)*100)],
             backgroundColor: [
                 "#FF8153",
                 "#4ACAB4",
@@ -114,9 +114,9 @@
     options: options1
     });
 
-    var data2_pos = json_data1['total_pos'];
-    var data2_neu = json_data1['total_neu'];
-    var data2_neg = json_data1['total_neg'];
+    var data2_pos = json_data['data2']['total_pos'];
+    var data2_neu = json_data['data2']['total_neu'];
+    var data2_neg = json_data['data2']['total_neg'];
     var total2 = data1_pos + data1_neg + data1_neu;
 
     var pieData2 = {
@@ -127,7 +127,7 @@
     ],
     datasets: [
         {
-            data: [((data2_pos / total2)*100).toString() + '%', ((data2_neu / total2)*100).toString() + '%', ((data2_neg / total2)*100).toString() + '%'],
+            data: [((data2_pos / total2)*100), ((data2_neu / total2)*100), ((data2_neg / total2)*100)],
             backgroundColor: [
                 "#FF8153",
                 "#4ACAB4",

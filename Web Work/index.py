@@ -16,74 +16,86 @@ def hello():
 
 max_items = 20
 
+@app.route('/feedback')
+def feed_back():
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+
+    file = open()
+
+
 @app.route("/main")
 def main_page():
-    global max_items
-    query = request.args.get('query')
-    # request.args.get('max_items')
+    try:
+        global max_items
+        query = request.args.get('query')
+        # request.args.get('max_items')
 
-    final_list = []
-    final_count = []
+        final_list = []
+        final_count = []
 
-    consumer_key = 'AYDNqr9ycBI9qaOWoYXJgYnKY'
-    consumer_secret = 'tSHVPOr6JrQ9KNnqX1aSOGnKecmPeQQ37j81JAURI0t6deb8AA'
-    access_token = '2493864625-SSCalZj2of8hITNgrv4gMvNZX7seGTSWD2MQI0H'
-    access_token_secret = '5JBwqg2jWjijXgIRpEsdLrGRYWEuNmc4M0ibfRL2xzrhd'
+        consumer_key = 'AYDNqr9ycBI9qaOWoYXJgYnKY'
+        consumer_secret = 'tSHVPOr6JrQ9KNnqX1aSOGnKecmPeQQ37j81JAURI0t6deb8AA'
+        access_token = '2493864625-SSCalZj2of8hITNgrv4gMvNZX7seGTSWD2MQI0H'
+        access_token_secret = '5JBwqg2jWjijXgIRpEsdLrGRYWEuNmc4M0ibfRL2xzrhd'
 
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True)
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
+        api = tweepy.API(auth, wait_on_rate_limit=True)
 
-    # nltk.download('vader_lexicon')
+        # nltk.download('vader_lexicon')
 
-    dates = []
+        dates = []
 
-    for i in range(10):
-        N = 10 - i
-        date_start = datetime.now() - timedelta(days=N)
-        date_now = datetime.now() - timedelta(days=N - 1)
-        date_until = datetime.now() - timedelta(days=N - 2)
+        for i in range(10):
+            N = 10 - i
+            date_start = datetime.now() - timedelta(days=N)
+            date_now = datetime.now() - timedelta(days=N - 1)
+            date_until = datetime.now() - timedelta(days=N - 2)
 
-        dates.append(date_now.strftime('%d %b'))
+            dates.append(date_now.strftime('%d %b'))
 
-        lis, counts = search(api, query, max_items, date_start, date_until)
-        print("Completed {} of 10".format(i+1))
-        final_list.append(lis)
-        final_count.append(counts)
+            lis, counts = search(api, query, max_items, date_start, date_until)
+            print("Completed {} of 10".format(i+1))
+            final_list.append(lis)
+            final_count.append(counts)
 
-    for i in range(len(final_count)):
-        temp_list = [final_count[i]['Positive'] , final_count[i]['Neutral'] , final_count[i]['Negative']]
-        final_count[i] = temp_list
+        for i in range(len(final_count)):
+            temp_list = [final_count[i]['Positive'] , final_count[i]['Neutral'] , final_count[i]['Negative']]
+            final_count[i] = temp_list
 
-    pos_line_graph_list = []
-    neu_line_graph_list = []
-    neg_line_graph_list = []
+        pos_line_graph_list = []
+        neu_line_graph_list = []
+        neg_line_graph_list = []
 
-    total_pos = 0
-    total_neu = 0
-    total_neg = 0
+        total_pos = 0
+        total_neu = 0
+        total_neg = 0
 
-    for i in range(len(final_count)):
-        pos_line_graph_list.append(final_count[i][0])
-        neu_line_graph_list.append(final_count[i][1])
-        neg_line_graph_list.append(final_count[i][2])
+        for i in range(len(final_count)):
+            pos_line_graph_list.append(final_count[i][0])
+            neu_line_graph_list.append(final_count[i][1])
+            neg_line_graph_list.append(final_count[i][2])
 
-        total_pos += final_count[i][0]
-        total_neu += final_count[i][1]
-        total_neg += final_count[i][2]
+            total_pos += final_count[i][0]
+            total_neu += final_count[i][1]
+            total_neg += final_count[i][2]
 
-    avg_pos = total_pos/(total_pos + total_neg)
-    avg_neg = total_neg/(total_pos + total_neg)
+        avg_pos = total_pos/(total_pos + total_neg)
+        avg_neg = total_neg/(total_pos + total_neg)
 
-    data = {'tweets': final_list , 'pos_line_data' : pos_line_graph_list
-            , 'neu_line_data' : neu_line_graph_list , 'neg_line_data' : neg_line_graph_list
-            , 'total_pos' : total_pos , 'total_neu' : total_neu
-            , 'total_neg' : total_neg ,'avg_pos' : avg_pos
-            , 'avg_neg' : avg_neg ,  'name' : query , 'dates' : dates}
+        data = {'tweets': final_list , 'pos_line_data' : pos_line_graph_list
+                , 'neu_line_data' : neu_line_graph_list , 'neg_line_data' : neg_line_graph_list
+                , 'total_pos' : total_pos , 'total_neu' : total_neu
+                , 'total_neg' : total_neg ,'avg_pos' : avg_pos
+                , 'avg_neg' : avg_neg ,  'name' : query , 'dates' : dates}
 
-    similar = get_names(query)
+        similar = get_names(query)
 
-    return render_template('main.html', data=data, similar=similar)
+        return render_template('main.html', data=data, similar=similar)
+    except ZeroDivisionError:
+        return render_template('error.html')
 
 
 @app.route('/compare')
