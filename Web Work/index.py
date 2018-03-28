@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 import tweepy
 from datetime import datetime
 from datetime import timedelta
@@ -13,17 +13,17 @@ app.config['SECRET_KEY'] = 'e5ac358c-f0bf-11e5-9e39-d3b532c10a28'
 def hello():
     return render_template('index.html')
 
-
 max_items = 20
 
-@app.route('/feedback')
-def feed_back():
+@app.route("/feedback", methods=['POST'])
+def feedback():
+    date = datetime.now()
     name = request.form['name']
     email = request.form['email']
     message = request.form['message']
-
-    file = open()
-
+    file = open('feedback.csv', 'a')
+    file.write(name + ',' + email + ',' + message + ',' + str(date) + '\n')
+    return render_template('feedback.html')
 
 @app.route("/main")
 def main_page():
@@ -96,7 +96,6 @@ def main_page():
         return render_template('main.html', data=data, similar=similar)
     except ZeroDivisionError:
         return render_template('error.html')
-
 
 @app.route('/compare')
 def compare_page():
