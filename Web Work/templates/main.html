@@ -178,13 +178,13 @@
 
                     {% for choice in similar %}
                         <div class="choice">
-                            <input type="submit" onclick="showLoading();" name="btn" class="btnn" style="color: grey" value="{{ choice }}" />
+                            <input type="submit" onclick="clearText(); showLoading();" name="btn" class="btnn" style="color: grey" value="{{ choice }}" />
                         </div>
                     {% endfor %}
                     </div>
                     <div class="col-sm-4">
                         <h3 style='color: white;font-family: sans-serif;'>Or Enter Your Own:</h3>
-                        <input type="text" name="comp_data">
+                        <input type="text" id="comp_data" name="comp_data">
                         <input type="submit" onclick="clearBtn();showLoading();" class="btnn" style="color: grey">
 
                     </div>
@@ -478,6 +478,10 @@
                 elems[i].value = '';
                 console.log(elems[i].valueOf());
             }
+        }
+        function clearText(){
+            var elem = document.getElementById('comp_data');
+            elem.value = '';
         }
 
         // local storage
