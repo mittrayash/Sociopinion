@@ -24,9 +24,12 @@ def search(api, query, max_items, startdate, enddate):
         link = 'https://twitter.com/' + username
 
         # sid = SentimentIntensityAnalyzer()
+##############################################
+        sentence = sentence.replace('"', "'")
+        sentence = re.sub('[^ a-zA-Z0-9,.()!@#$%^&*_+-=~`<>?/\|{}:\']', '', sentence)
 
-        sentence = re.sub('[^ a-zA-Z0-9' ']', '', sentence)
-        sentence = sentence.lower()
+
+        # sentence = sentence.lower()
         # sentence1 = [tweet.text]
 
         test = TextBlob(sentence)

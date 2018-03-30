@@ -104,12 +104,11 @@ def compare_page():
     btn = request.args.get('btn')
     comp_data = request.args.get('comp_data')
 
-    if btn:
-        query = btn
-    else:
+    if len(comp_data.strip()) > 1:
         query = comp_data
+    else:
+        query = btn
 
-    # request.args.get('max_items')
 
     final_list = []
     final_count = []

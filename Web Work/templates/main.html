@@ -19,7 +19,8 @@
     .btnn {
         background: #222110 no-repeat 9px center;
         border: solid 1px black;
-        padding: 9px 10px 9px 32px;
+        padding-top: 5px;
+        padding-bottom: 5px!important;
         width: 100%;
         -webkit-border-radius: 10em;
         -moz-border-radius: 10em;
@@ -36,7 +37,7 @@
 
 
     #block_type1{
-      height:40%;
+
       background-color: #2A2A37;
       border-radius: 5px;
       text-align: center;
@@ -171,7 +172,7 @@
         <div class="col-sm-5" id="block_type2" >
 
             <h2 style='color: white;font-family: sans-serif;'> Compare with ...</h2>
-            <div class="row">
+            <div class="row" style='padding-top: 10px; padding-bottom: 10px;'>
                 <form action="compare" method="get">
                     <div class="col-sm-6 col-sm-offset-1 col-sm-pull-1">
 
@@ -184,7 +185,7 @@
                     <div class="col-sm-4">
                         <h3 style='color: white;font-family: sans-serif;'>Or Enter Your Own:</h3>
                         <input type="text" name="comp_data">
-                        <input type="submit" onclick="showLoading();" class="btnn" style="color: grey">
+                        <input type="submit" onclick="clearBtn();showLoading();" class="btnn" style="color: grey">
 
                     </div>
                 </form>
@@ -205,7 +206,7 @@
                         <div class="col-sm-2">
                             <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
                         </div>
-                        <div class="col-sm-10" style="text-align: left">
+                        <div class="col-sm-10" style="text-align: left; word-wrap: break-word;">
                             <span style="color: crimson;font-weight:bold;font-size: large" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </span>
                             <span style="color: #464a4c;margin-left: 10px; color: grey;" id="tweet_created_on" class="tweet_created_on">{{ item_in['date'] }}</span>
                             <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item_in['text'] }}</p>
@@ -224,9 +225,9 @@
                         <div class="col-sm-2">
                             <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
                         </div>
-                        <div class="col-sm-10" style="text-align: left">
-                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </h4>
-                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">{{ item_in['date'] }}</p>
+                        <div class="col-sm-10" style="text-align: left; word-wrap: break-word;">
+                            <span style="color: crimson;font-weight:bold;font-size: large" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </span>
+                            <span style="color: #464a4c;margin-left: 10px; color: grey;" id="tweet_created_on" class="tweet_created_on">{{ item_in['date'] }}</span>
                             <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item_in['text'] }}</p>
 
                         </div>
@@ -244,9 +245,9 @@
                         <div class="col-sm-2">
                             <img src="{{ url_for('static',filename='img/twitter_icon.png') }}" alt="logo">
                         </div>
-                        <div class="col-sm-10" style="text-align: left">
-                            <h4 style="color: crimson;font-weight:bold" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </h4>
-                            <p style="color: #464a4c;margin-left: 10px;" id="tweet_created_on">{{ item_in['date'] }}</p>
+                        <div class="col-sm-10" style="text-align: left; word-wrap: break-word;">
+                            <span style="color: crimson;font-weight:bold;font-size: large" id="tweet_created_by"><a class='links' href="{{ item_in['link'] }}">{{ item_in['username'] }} </a> </span>
+                            <span style="color: #464a4c;margin-left: 10px; color: grey;" id="tweet_created_on" class="tweet_created_on">{{ item_in['date'] }}</span>
                             <p style="color: #464a4c;margin-left: 10px;" id="tweet_text">{{ item_in['text'] }}</p>
 
                         </div>
@@ -468,6 +469,15 @@
             document.getElementById("btn_pos").classList.add('w3-black');
             document.getElementById("btn_all").classList.remove('w3-teal');
             document.getElementById("btn_all").classList.add('w3-black');
+        }
+
+        function clearBtn(){
+            var elems = document.getElementsByClassName('btnn');
+
+            for(var i=0; i < elems.length; i++){
+                elems[i].value = '';
+                console.log(elems[i].valueOf());
+            }
         }
 
         // local storage
