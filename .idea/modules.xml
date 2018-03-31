@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../OpenCV Practice/.idea/OpenCV Practice.iml" filepath="$PROJECT_DIR$/../OpenCV Practice/.idea/OpenCV Practice.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Rajasthan-Hackathon-4.0.iml" filepath="$PROJECT_DIR$/.idea/Rajasthan-Hackathon-4.0.iml" />
     </modules>
   </component>
