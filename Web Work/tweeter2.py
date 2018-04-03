@@ -12,12 +12,12 @@ def search(api, query, max_items, startdate, enddate):
     end_date = enddate.strftime('%Y-%m-%d')
 
     for i, tweet in enumerate(
-            tweepy.Cursor(api.search, q=query, count=100, lang="en", since=start_date, until=end_date).items(max_items)):
+            tweepy.Cursor(api.search, q=query + ' -filter:retweets', count=200, lang="en", since=start_date, until=end_date, tweet_mode="extended").items(max_items)):
         pos = 0
         neg = 0
         neu = 0
 
-        sentence = tweet.text
+        sentence = tweet.full_text
         date = tweet.created_at.strftime('%d %b %Y')
         user = tweet.user
         username = user.screen_name

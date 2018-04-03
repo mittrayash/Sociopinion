@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
     <title>Main Page</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="{{ url_for('static',filename='img/favicon.ico') }}" type="image/x-icon" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
@@ -353,11 +353,12 @@
 
     var pieData2 = {
       labels: [
-        "% Popularity"
+        "% Popularity",
+          "% Notoriety"
     ],
     datasets: [
         {
-            data: [json_data['avg_pos'], json_data['avg_neg']],
+            data: [(json_data['avg_pos']*100).toFixed(2), (json_data['avg_neg']*100).toFixed(2)],
             backgroundColor: [
                 "#FF8153",
                 "#2A2A37"
@@ -417,7 +418,7 @@
   options: {
     title: {
       display: true,
-      text: 'Sentimental Analysis'
+      text: 'Sentiment Analysis'
     }
   }
 });
