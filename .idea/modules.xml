@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../OpenCV Practice/.idea/OpenCV Practice.iml" filepath="$PROJECT_DIR$/../OpenCV Practice/.idea/OpenCV Practice.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Rajasthan-Hackathon-4.0.iml" filepath="$PROJECT_DIR$/.idea/Rajasthan-Hackathon-4.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../color-admin/.idea/color-admin.iml" filepath="$PROJECT_DIR$/../../color-admin/.idea/color-admin.iml" />
     </modules>
   </component>
 </project>

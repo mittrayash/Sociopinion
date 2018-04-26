@@ -59,12 +59,19 @@
 
     <script type="text/javascript" language="JavaScript">
 
-    var str_data = '{{ final_data | tojson | safe  }}' ;
+    var str_data = '{{ final_data | tojson | safe }}' ;
     var json_data = JSON.parse(str_data) ;
 
-    var temp = localStorage.getItem('data')
+
+    var original = '{{ original }}';
+    var temp = localStorage.getItem(original);
+    console.log(original);
     temp = JSON.parse(temp);
     json_data1 = temp;
+
+    /*if(json_data1 == null){
+        window.location = "error.html";
+    }*/
 
     document.getElementById('header').innerHTML = '#' + json_data1['name'] + ' vs #' + json_data['data2']['name'];
 
@@ -72,7 +79,6 @@
     var data1_neu = json_data1['total_neu'];
     var data1_neg = json_data1['total_neg'];
     var total1 = data1_pos + data1_neg + data1_neu;
-console.log(((data1_pos / total1)*100).toString() + '%')
     var pieData1 = {
       labels: [
         "Positive",

@@ -150,7 +150,7 @@
     <div id="loader" style="display: none"></div>
 
 	<div class='row', style='height: 30px; background-color: black;margin-left: 20px;'>
-		<h5 style="color: #ffffff;text-align: center">Sentimental Analysis - #{{ data['name'] }}</h5>
+		<h5 style="color: #ffffff;text-align: center" id="capture">Sentimental Analysis - #{{ data['name'] }}</h5>
 	</div>
 
 
@@ -186,6 +186,7 @@
                     <div class="col-sm-4">
                         <h3 style='color: white;font-family: sans-serif;'>Or Enter Your Own:</h3>
                         <input type="text" id="comp_data" name="comp_data">
+                        <input type="hidden" id="query" name="query" value="0">
                         <input type="submit" onclick="clearBtn();showLoading();" class="btnn" style="color: grey">
 
                     </div>
@@ -478,18 +479,27 @@
 
             for(var i=0; i < elems.length; i++){
                 elems[i].value = '';
-                console.log(elems[i].valueOf());
+                //console.log(elems[i].valueOf());
             }
+
+            // Also get the value of the query to pass to the next page
+            document.getElementById('query').value = document.getElementById('capture').innerText.slice(24);
+
         }
+
         function clearText(){
             var elem = document.getElementById('comp_data');
             elem.value = '';
+            document.getElementById('query').value = document.getElementById('capture').innerText.slice(24);
+
         }
 
         // local storage
 
         var t1 = '{{ data | tojson | safe  }}'
-        localStorage.setItem("data", t1);
+        var obj = JSON.parse(t1)
+        localStorage.setItem(obj.name, t1);
+
 
     </script>
 

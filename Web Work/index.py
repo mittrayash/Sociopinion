@@ -17,6 +17,7 @@ max_items = 20
 
 @app.route("/feedback", methods=['POST'])
 def feedback():
+
     date = datetime.now()
     name = request.form['name']
     email = request.form['email']
@@ -35,14 +36,7 @@ def main_page():
     final_list = []
     final_count = []
 
-    consumer_key = 'AYDNqr9ycBI9qaOWoYXJgYnKY'
-    consumer_secret = 'tSHVPOr6JrQ9KNnqX1aSOGnKecmPeQQ37j81JAURI0t6deb8AA'
-    access_token = '2493864625-SSCalZj2of8hITNgrv4gMvNZX7seGTSWD2MQI0H'
-    access_token_secret = '5JBwqg2jWjijXgIRpEsdLrGRYWEuNmc4M0ibfRL2xzrhd'
 
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True)
 
     # nltk.download('vader_lexicon')
 
@@ -56,13 +50,14 @@ def main_page():
 
         dates.append(date_now.strftime('%d %b'))
 
-        lis, counts = search(api, query, max_items, date_start, date_until)
+        lis, counts = search(query, max_items, date_start, date_until)
+
         print("Completed {} of 10".format(i+1))
         final_list.append(lis)
         final_count.append(counts)
 
     for i in range(len(final_count)):
-        temp_list = [final_count[i]['Positive'] , final_count[i]['Neutral'] , final_count[i]['Negative']]
+        temp_list = [final_count[i]['Positive'], final_count[i]['Neutral'] , final_count[i]['Negative']]
         final_count[i] = temp_list
 
     pos_line_graph_list = []
@@ -104,6 +99,7 @@ def compare_page():
 
     btn = request.args.get('btn')
     comp_data = request.args.get('comp_data')
+    original = request.args.get('query')
 
     if len(comp_data.strip()) > 1:
         query = comp_data
@@ -133,7 +129,7 @@ def compare_page():
 
         date_until = datetime.now() - timedelta(days=N - 2)
 
-        lis, counts = search(api, query, max_items, date_start, date_until)
+        lis, counts = search(query, max_items, date_start, date_until)
 
         final_list.append(lis)
         final_count.append(counts)
@@ -172,7 +168,7 @@ def compare_page():
 
     final_data = {'data2': data2}
 
-    return render_template('compare.html', final_data=final_data)
+    return render_template('compare.html', final_data=final_data, original=original)
 
 
 if __name__ == '__main__':
