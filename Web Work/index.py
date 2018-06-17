@@ -36,7 +36,7 @@ def main_page():
     final_list = []
     final_count = []
 
-
+    query = query.replace('#', '')
 
     # nltk.download('vader_lexicon')
 
